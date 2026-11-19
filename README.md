@@ -60,7 +60,7 @@ Classic Winamp defined how a generation listened to music on the desktop: skinna
 | **Double size & shade** | Double-size mode and shade (title-bar compact) modes. |
 | **Always on top** | Optional stay-on-top for the main window. |
 | **System tray** | Tray icon, minimize-to-tray options, and song-change notifications. |
-| **Spectrum analyzer** | Logarithmic spectrum matching classic Winamp band mapping (`sa_tab[]`-style distribution). Live bars need the Qt 6.8 PCM tap; older Qt draws the chrome with no samples. |
+| **Visualizations** | The main window’s `V` button opens a chooser for Off, Spectrum analyzer, Oscilloscope, VU meter, and Milkdrop. Double-click the built-in visualization area to launch Milkdrop directly. The classic modes use logarithmic spectrum mapping; live audio-reactive samples need the Qt 6.8 PCM tap. |
 
 ### Equalizer
 | Feature | Details |

@@ -2552,7 +2552,8 @@ protected:
                 onToggleDoubleSize();
                 return;
             }
-            // V: visualization menu (not implemented; swallow the click)
+            // V: open the visualization mode menu, including Milkdrop.
+            showVisualizationMenu(waMouseGlobalPos(event));
             return;
         }
         
@@ -3626,6 +3627,39 @@ private:
         milkdropWindow->raise();
         milkdropWindow->activateWindow();
     }
+
+    void showVisualizationMenu(const QPoint &globalPos) {
+        QMenu menu(this);
+        menu.setTitle("Visualization");
+        QAction *offAct = menu.addAction("Off");
+        QAction *spectrumAct = menu.addAction("Spectrum analyzer");
+        QAction *scopeAct = menu.addAction("Oscilloscope");
+        QAction *vuAct = menu.addAction("VU meter");
+        offAct->setCheckable(true);
+        spectrumAct->setCheckable(true);
+        scopeAct->setCheckable(true);
+        vuAct->setCheckable(true);
+        offAct->setChecked(visMode == 0);
+        spectrumAct->setChecked(visMode == 1);
+        scopeAct->setChecked(visMode == 2);
+        vuAct->setChecked(visMode == 3);
+        menu.addSeparator();
+        QAction *milkdropAct = menu.addAction("Milkdrop visualization...");
+
+        QAction *selected = menu.exec(globalPos);
+        if (selected == offAct) visMode = 0;
+        else if (selected == spectrumAct) visMode = 1;
+        else if (selected == scopeAct) visMode = 2;
+        else if (selected == vuAct) visMode = 3;
+        else if (selected == milkdropAct) {
+            openMilkdrop();
+            return;
+        } else {
+            return;
+        }
+        update();
+    }
+
     bool eqWasVisible = false;
     bool plWasVisible = false;
     bool mainWasVisible = true;
